@@ -5,7 +5,9 @@ from tracardi.domain.session import Session
 
 
 async def main():
-    init = {}
+    init = {
+        "url": 'session@context.page.url'
+    }
 
     payload = {}
 
