@@ -10,11 +10,14 @@ async def main():
     payload = {}
 
     plugin = ParseURLParameters(**init)
-    plugin.session = Session(context={
-        'page': {
-            'url': "http://test.url/path/?param=1"
+    plugin.session = Session(
+        id='1',
+        context={
+            'page': {
+                'path': "http://test.url/path/?param=1"  # Incorrect key
+            }
         }
-    })
+    )
 
     result = await plugin.run(void=payload)
     print(result)
