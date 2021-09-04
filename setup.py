@@ -14,7 +14,6 @@ setup(
     packages=['tracardi_url_parser'],
     install_requires=[
         'tracardi_plugin_sdk',
-        'urllib',
         'tracardi_dot_notation'
     ],
     classifiers=[
