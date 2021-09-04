@@ -15,11 +15,11 @@ class ParseURLParameters(ActionRunner):
 
         self.url = kwargs['url']
 
-    async def run(self, void):
+    async def run(self, payload):
         if not isinstance(self.session.context, dict):
             raise KeyError("No session context defined.")
 
-        dot = DotAccessor(self.profile, self.session, None, self.event, self.flow)
+        dot = DotAccessor(self.profile, self.session, payload, self.event, self.flow)
         page_url = dot[self.url]
 
         parsed = urlparse(page_url)
@@ -44,11 +44,12 @@ def register() -> Plugin:
         spec=Spec(
             module='tracardi_url_parser.plugin',
             className='ParseURLParameters',
-            inputs=['void'],
+            inputs=['payload'],
             outputs=['payload'],
             init={
                 'url': 'session@context.page.url'
-            }
+            },
+            version="0.1.2"
         ),
         metadata=MetaData(
             name='Parse URL',
