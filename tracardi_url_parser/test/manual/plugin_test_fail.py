@@ -21,7 +21,7 @@ async def main():
         }
     )
 
-    result = await plugin.run(void=payload)
+    result = await plugin.run(payload)
     print(result)
 
 

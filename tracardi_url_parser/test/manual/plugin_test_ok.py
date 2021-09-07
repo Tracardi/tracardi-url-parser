@@ -21,8 +21,8 @@ async def main():
         }
     )
 
-    result = await plugin.run(void=payload)
-    print(result)
+    return await plugin.run(payload)
 
 
-asyncio.run(main())
+result = asyncio.run(main())
+print(result)
