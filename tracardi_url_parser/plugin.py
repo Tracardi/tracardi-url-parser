@@ -58,6 +58,6 @@ def register() -> Plugin:
             width=200,
             height=100,
             icon='url',
-            group=["Operations"]
+            group=["Data processing"]
         )
     )
