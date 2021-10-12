@@ -13,7 +13,7 @@ setup(
     author_email='',
     packages=['tracardi_url_parser'],
     install_requires=[
-        'tracardi_plugin_sdk',
+        'tracardi_plugin_sdk>=0.6.18',
         'tracardi_dot_notation'
     ],
     classifiers=[

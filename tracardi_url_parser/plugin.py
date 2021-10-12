@@ -1,5 +1,5 @@
 from tracardi_dot_notation.dot_accessor import DotAccessor
-from tracardi_plugin_sdk.domain.register import Plugin, Spec, MetaData
+from tracardi_plugin_sdk.domain.register import Plugin, Spec, MetaData, Form, FormGroup, FormField, FormComponent
 from tracardi_plugin_sdk.action_runner import ActionRunner
 from tracardi_plugin_sdk.domain.result import Result
 
@@ -49,11 +49,23 @@ def register() -> Plugin:
             init={
                 'url': 'session@context.page.url'
             },
+            form=Form(groups=[
+                FormGroup(
+                    fields=[
+                        FormField(
+                            id="url",
+                            name="Path to page URL",
+                            description="Type path to page url in context or session.",
+                            component=FormComponent(type="text", props={"label": "Page URL"})
+                        )
+                    ]
+                ),
+            ]),
             version="0.1.2"
         ),
         metadata=MetaData(
             name='Parse URL',
-            desc='Reads URL parameters form context, parses it and returns as dictionary.',
+            desc='Reads URL parameters form context, parses it and returns result on output.',
             type='flowNode',
             width=200,
             height=100,
