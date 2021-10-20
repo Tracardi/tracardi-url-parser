@@ -1,4 +1,3 @@
-from tracardi_dot_notation.dot_accessor import DotAccessor
 from tracardi_plugin_sdk.domain.register import Plugin, Spec, MetaData, Form, FormGroup, FormField, FormComponent
 from tracardi_plugin_sdk.action_runner import ActionRunner
 from tracardi_plugin_sdk.domain.result import Result
@@ -6,21 +5,22 @@ from tracardi_plugin_sdk.domain.result import Result
 import urllib
 from urllib.parse import urlparse
 
+from tracardi_url_parser.model.configuration import Configuration
+
+
+def validate(config: dict):
+    return Configuration(**config)
+
 
 class ParseURLParameters(ActionRunner):
 
     def __init__(self, **kwargs):
-        if 'url' not in kwargs or kwargs['url'] is None:
-            raise ValueError("Please define url location as dot notation path.")
-
-        self.url = kwargs['url']
+        self.config = validate(kwargs)
 
     async def run(self, payload):
-        if not isinstance(self.session.context, dict):
-            raise KeyError("No session context defined.")
 
-        dot = DotAccessor(self.profile, self.session, payload, self.event, self.flow)
-        page_url = dot[self.url]
+        dot = self._get_dot_accessor(payload)
+        page_url = dot[self.config.url]
 
         parsed = urlparse(page_url)
         params = urllib.parse.parse_qsl(parsed.query)
@@ -49,6 +49,7 @@ def register() -> Plugin:
             init={
                 'url': 'session@context.page.url'
             },
+            manual="url_parser_action",
             form=Form(groups=[
                 FormGroup(
                     fields=[
@@ -56,14 +57,17 @@ def register() -> Plugin:
                             id="url",
                             name="Path to page URL",
                             description="Type path to page url in context or session.",
-                            component=FormComponent(type="text", props={"label": "Page URL"})
+                            component=FormComponent(type="dotPath", props={
+                                "defaultSourceValue": "session",
+                                "defaultMode": 1
+                            })
                         )
                     ]
                 ),
             ]),
             license="MIT",
             author="EMGE1, Risto Kowaczewski",
-            version="0.1.3"
+            version="0.6.0"
         ),
         metadata=MetaData(
             name='Parse URL',

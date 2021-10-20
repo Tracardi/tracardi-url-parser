@@ -4,7 +4,7 @@ This plugin parses URL and returns it as output.
 
 # Configuration
 
-User must provide a path to page URL. By default path is available at `session` in `context.page.url`
+User must provide a path to page URL. By default, path is available at `session` in `context.page.url`
 
 ```json
 {
@@ -12,9 +12,9 @@ User must provide a path to page URL. By default path is available at `session` 
 }
 ```
 
-# Payload
+# Input
 
-This action does not process payload directly.
+This action does not process input payload directly.
 
 # Output
 
@@ -28,7 +28,8 @@ Output example for url `http://web.address.com/path/index.html?param1=1#hash`:
   "path": "path",
   "query": "index.html?param1=1",
   "params": {
-    "param1":"1"
+    "param1": "1"
+  },
   "fragment": "hash"
 }
 ```
