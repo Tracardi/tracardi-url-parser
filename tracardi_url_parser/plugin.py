@@ -52,6 +52,7 @@ def register() -> Plugin:
             manual="url_parser_action",
             form=Form(groups=[
                 FormGroup(
+                    name="Url parser",
                     fields=[
                         FormField(
                             id="url",
