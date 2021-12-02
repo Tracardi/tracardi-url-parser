@@ -68,7 +68,7 @@ def register() -> Plugin:
             ]),
             license="MIT",
             author="EMGE1, Risto Kowaczewski",
-            version="0.6.0"
+            version="0.6.0.1"
         ),
         metadata=MetaData(
             name='Parse URL',

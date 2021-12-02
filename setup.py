@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setup(
     name='tracardi-url-parser',
-    version='0.6.0',
+    version='0.6.0.1',
     description='The purpose of this plugin is to parse URL and return it.',
     long_description=long_description,
     long_description_content_type="text/markdown",
